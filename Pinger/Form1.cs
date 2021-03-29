@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroSet_UI.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,15 +12,17 @@ using System.Windows.Forms;
 
 namespace Pinger
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MetroSetForm
     {
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void metroSetButton1_Click(object sender, EventArgs e)
         {
+            textBox1.Text = null;
+
             if (String.IsNullOrEmpty(txtIP.Text))
             {
                 Ping ping = new Ping();
@@ -52,20 +55,9 @@ namespace Pinger
                 {
                     textBox1.Text = "Adress is unreachable. . .";
                 }
-               
+                txtIP.Text = null;
 
             }
-        }
-
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            
         }
     }
 }
