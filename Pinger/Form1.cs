@@ -21,22 +21,22 @@ namespace Pinger
 
         private void metroSetButton1_Click(object sender, EventArgs e)
         {
-            textBox1.Text = null;
+            textBox1.Text = null; // Clear info-textbox.
 
-            if (String.IsNullOrEmpty(txtIP.Text))
+            if (String.IsNullOrEmpty(txtIP.Text))//Check if txtIP is empty and ping itself.
             {
                 Ping ping = new Ping();
-                PingReply reply = ping.Send("127.0.0.1", 1000);
-                String Status = reply.Status.ToString();
-                String Adress = reply.Address.ToString();
-                String Trip = reply.RoundtripTime.ToString();
-                String TTL = reply.Options.Ttl.ToString();
-                String DF = reply.Options.DontFragment.ToString();
-                String Buffer = reply.Buffer.Length.ToString();
-                string newLine = Environment.NewLine;
+                PingReply reply = ping.Send("127.0.0.1", 1000); //Basically - ping yourself.
+                String Status = reply.Status.ToString(); // Get check result for reaching adress.
+                String Adress = reply.Address.ToString(); // Get pinged IP.
+                String Trip = reply.RoundtripTime.ToString(); // Get dealy in ms.
+                String TTL = reply.Options.Ttl.ToString(); // Get TTL.
+                String DF = reply.Options.DontFragment.ToString(); //Check if package fragmented.
+                String Buffer = reply.Buffer.Length.ToString();// Check buffer length.
+                string newLine = Environment.NewLine; // Well, that's really bad, but i'll fix this someday later... maybe... makes a new line in infobox.
                 textBox1.Text = ("Pinging this machine..." + newLine + "Status: " + Status + newLine + "Pinged to: " + Adress + newLine + "Delay: " + Trip + " ms." + newLine + "TTL: " + TTL + newLine + "Fragmentation: " + DF + newLine + "Buffer Size: " + Buffer + " Bytes" + newLine + "Done . . .");
             }
-            else
+            else // Else ping IP from txtIP textbox.
             {
                 try
                 {
@@ -48,14 +48,14 @@ namespace Pinger
                     String TTL = reply1.Options.Ttl.ToString();
                     String DF = reply1.Options.DontFragment.ToString();
                     String Buffer = reply1.Buffer.Length.ToString();
-                    string newLine = Environment.NewLine;
+                    string newLine = Environment.NewLine; 
                     textBox1.Text = ("IPStatus: " + Status + newLine + "Adress: " + Adress + newLine + "RoundTripTime: " + Trip + newLine + "TTL: " + TTL + newLine + "Fragmentation: " + DF + newLine + "Buffer Size: " + Buffer + " Bytes" + newLine + "Done . . .");
                 }
-                catch (PingException)
+                catch (PingException)// There's always an exception if it can't reach entered adress.
                 {
-                    textBox1.Text = "Adress is unreachable. . .";
+                    textBox1.Text = "Adress is unreachable. . ."; 
                 }
-                txtIP.Text = null;
+                txtIP.Text = null; //Clear txtIP
 
             }
         }
